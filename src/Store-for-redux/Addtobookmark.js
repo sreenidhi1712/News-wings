@@ -3,28 +3,20 @@ import {createSlice} from '@reduxjs/toolkit'
 
 
  const Slices = createSlice({
-    name:"cart",
+    name:"Bookmark",
     initialState:[],
     reducers:{
         addtobookmark(state,action) {
-            let find = state.findIndex(item=>item.id===action.payload.id)
-            if(find>=0){
-                state[find].rating.quantity+=1;
-            
-            }
-            else{
-                state.push(action.payload);
-            }
-               
+                state.push(action.payload);    
         },
         removebookmark(state,action){
-            return state.filter(item=>item.id!==action.payload.id)
+            return state.filter(item=>item.id!==action.payload.title)
         }
 
     }
 
 })
 
-export  const {addtobookmark,removebookmark} = CartSlice.actions;
+export  const {addtobookmark,removebookmark} = Slices.actions;
 
 export default Slices.reducer;

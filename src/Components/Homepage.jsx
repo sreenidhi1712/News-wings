@@ -76,7 +76,7 @@ function Homepage() {
 {/* news cards  https://newsapi.org/v2/top-headlines?country=us&apiKey=4c8372e1b7fa43c9a89c2a176b9461bb */}
            <div className='flex overflow-x-scroll hide-scrollbar w-full  mt-28   '> 
                {news.map((items)=>(
-                        <div className={`h-36 w-[85%] mx-3 flex items-end flex-shrink-0 rounded-lg  bg-cover bg-center`} style={{ backgroundImage: `url(${items.urlToImage})` }}>
+                        <div key={items.title} className={`h-36 w-[85%] mx-3 flex items-end flex-shrink-0 rounded-lg  bg-cover bg-center`} style={{ backgroundImage: `url(${items.urlToImage})` }}>
                                  <p className='font-bold text-sm text-white  ml-3'>{items.title}</p>
                         </div>
                      )
@@ -88,7 +88,7 @@ function Homepage() {
                <p className='mx-3 font-bold text-xl'>Trending Topic</p>
                <div className={`flex overflow-x-scroll hide-scrollbar w-full `} >
                {trending.map((items)=>(
-                        <div className={`h-32 w-[40%] mt-5 mx-3 flex-shrink-0  bg-slate-200  rounded-lg bg-cover bg-center`} style={{ backgroundImage: `url(${items.image})` }}>
+                        <div key={items.title} className={`h-32 w-[40%] mt-5 mx-3 flex-shrink-0  bg-slate-200  rounded-lg bg-cover bg-center`} style={{ backgroundImage: `url(${items.image})` }}>
                                  <p className='text-white font-bold mt-3 ml-3'>{items.title}</p>
                         </div>
                      )
@@ -117,13 +117,14 @@ const Cards = ({title,Category,addbookmark})=>{
                <p className='mx-3 font-bold text-xl'>{title}</p>
                <div className={`flex flex-col w-full items-center `} >
                {Category.map((items)=>(
-                        <div className={  `h-32 w-[90%]  my-2 bg-slate-200  rounded-lg flex `}>
+                        <div className={  `h-32 w-[90%]  my-2 bg-slate-200  rounded-lg flex `} key={items.title}>
                                  <div className='h-[100%] w-[35%]  '>
                                            <img src={items.urlToImage} className='h-full w-full object-contain '/>
                                  </div>
                                  <div className='h-full w-[65%] '>
                                  <CiBookmark onClick={()=>{
                                         addbookmark(items)
+                                        
                                  }} />
                                  </div>
                         </div>
