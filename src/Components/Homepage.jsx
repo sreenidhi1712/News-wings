@@ -1,10 +1,19 @@
 import React, { useEffect ,useState} from 'react'
 import './Style.css'
 import axios from 'axios';
-
+import { CiBookmark } from "react-icons/ci";
+import { addtobookmark } from '../Store-for-redux/Addtobookmark';
+import { useDispatch } from 'react-redux';
 
 
 function Homepage() {
+     
+
+  const Dispatch  = useDispatch();
+
+  const addbookmark = (items)=>{
+    Dispatch(addtobookmark(items))
+  }
 
     const trending = [
         {image:"https://images.pexels.com/photos/209977/pexels-photo-209977.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -63,7 +72,7 @@ function Homepage() {
 
    
   return (
-    <div className='w-screen '>
+    <div className='w-screen mb-10'>
 {/* news cards  https://newsapi.org/v2/top-headlines?country=us&apiKey=4c8372e1b7fa43c9a89c2a176b9461bb */}
            <div className='flex overflow-x-scroll hide-scrollbar w-full  mt-28   '> 
                {news.map((items)=>(
@@ -87,9 +96,9 @@ function Homepage() {
                </div>
            </div>
 
-           <Cards title={"Headlines"} Category={headlines}/>
+           <Cards title={"Headlines"} Category={headlines} addbookmark={addbookmark}/>
 
-           <Cards title={"Latest News"} Category={latestNews}/>
+           <Cards title={"Latest News"} Category={latestNews} addbookmark={addbookmark}/>
           
 
 
@@ -101,7 +110,7 @@ export default Homepage
 
 
 
-const Cards = ({title,Category})=>{
+const Cards = ({title,Category,addbookmark})=>{
     return <>
      {/* headlines */} 
     <div className='flex flex-col w-full mt-5'>
@@ -113,7 +122,9 @@ const Cards = ({title,Category})=>{
                                            <img src={items.urlToImage} className='h-full w-full object-contain '/>
                                  </div>
                                  <div className='h-full w-[65%] '>
-                                        
+                                 <CiBookmark onClick={()=>{
+                                        addbookmark(items)
+                                 }} />
                                  </div>
                         </div>
                      )

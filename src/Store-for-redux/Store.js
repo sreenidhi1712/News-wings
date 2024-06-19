@@ -1,10 +1,10 @@
 import {  configureStore } from "@reduxjs/toolkit";
-import CartReducer from "./CartSlice"
+import Slices from "./Addtobookmark"
 
 
 export const CartStore = configureStore({
     reducer:{
-        cart:CartReducer,
+        Bookmark:Slices,
        
     }
 

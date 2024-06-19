@@ -17,11 +17,14 @@ import {createSlice} from '@reduxjs/toolkit'
             }
                
         },
+        removebookmark(state,action){
+            return state.filter(item=>item.id!==action.payload.id)
+        }
 
     }
 
 })
 
-export  const {addtobookmark} = CartSlice.actions;
+export  const {addtobookmark,removebookmark} = CartSlice.actions;
 
-export default CartSlice.reducer;
+export default Slices.reducer;
