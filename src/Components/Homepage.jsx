@@ -1,14 +1,14 @@
 import React, { useEffect ,useState} from 'react'
 import './Style.css'
 import axios from 'axios';
-import { CiBookmark } from "react-icons/ci";
+import { FaBookmark } from "react-icons/fa";
 import { addtobookmark } from '../Store-for-redux/Addtobookmark';
-import { useDispatch } from 'react-redux';
+import { useDispatch ,useSelector} from 'react-redux';
 
 
 function Homepage() {
      
-
+  const Bookmarked = useSelector(state=>state.Bookmark)
   const Dispatch  = useDispatch();
 
   const addbookmark = (items)=>{
@@ -78,6 +78,7 @@ function Homepage() {
                {news.map((items)=>(
                         <div key={items.title} className={`h-36 w-[85%] mx-3 flex items-end flex-shrink-0 rounded-lg  bg-cover bg-center`} style={{ backgroundImage: `url(${items.urlToImage})` }}>
                                  <p className='font-bold text-sm text-white  ml-3'>{items.title}</p>
+                                 <FaBookmark  className={`${Bookmarked.some((bookmarkedItem) => bookmarkedItem.title === items.title)?`text-red-600 `:`text-white`} h-6 w-6`} onClick={()=>addbookmark(items)} />
                         </div>
                      )
                )}
@@ -90,15 +91,16 @@ function Homepage() {
                {trending.map((items)=>(
                         <div key={items.title} className={`h-32 w-[40%] mt-5 mx-3 flex-shrink-0  bg-slate-200  rounded-lg bg-cover bg-center`} style={{ backgroundImage: `url(${items.image})` }}>
                                  <p className='text-white font-bold mt-3 ml-3'>{items.title}</p>
+                                
                         </div>
                      )
                )}
                </div>
            </div>
 
-           <Cards title={"Headlines"} Category={headlines} addbookmark={addbookmark}/>
+           <Cards title={"Headlines"} Category={headlines} addbookmark={addbookmark} Bookmarked={Bookmarked}/>
 
-           <Cards title={"Latest News"} Category={latestNews} addbookmark={addbookmark}/>
+           <Cards title={"Latest News"} Category={latestNews} addbookmark={addbookmark} Bookmarked={Bookmarked}/>
           
 
 
@@ -110,22 +112,19 @@ export default Homepage
 
 
 
-const Cards = ({title,Category,addbookmark})=>{
+const Cards = ({title,Category,addbookmark,Bookmarked})=>{
     return <>
      {/* headlines */} 
     <div className='flex flex-col w-full mt-5'>
                <p className='mx-3 font-bold text-xl'>{title}</p>
                <div className={`flex flex-col w-full items-center `} >
                {Category.map((items)=>(
-                        <div className={  `h-32 w-[90%]  my-2 bg-slate-200  rounded-lg flex `} key={items.title}>
+                        <div key={items.title} className={  `h-32 w-[90%]  my-2 bg-slate-200  rounded-lg flex `} >
                                  <div className='h-[100%] w-[35%]  '>
                                            <img src={items.urlToImage} className='h-full w-full object-contain '/>
                                  </div>
                                  <div className='h-full w-[65%] '>
-                                 <CiBookmark onClick={()=>{
-                                        addbookmark(items)
-                                        
-                                 }} />
+                                 <FaBookmark className={`${Bookmarked.some((bookmarkedItem) => bookmarkedItem.title === items.title)?`text-red-600`:`text-white`}`} onClick={()=>addbookmark(items)} />
                                  </div>
                         </div>
                      )

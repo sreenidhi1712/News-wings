@@ -7,16 +7,20 @@ import {createSlice} from '@reduxjs/toolkit'
     initialState:[],
     reducers:{
         addtobookmark(state,action) {
-                state.push(action.payload);    
+            let index = state.findIndex(item => item.title === action.payload.title);
+            if (index === -1) {
+                state.push(action.payload);
+              } else {
+                state.splice(index, 1);
+              }
+                  
         },
-        removebookmark(state,action){
-            return state.filter(item=>item.id!==action.payload.title)
-        }
+       
 
     }
 
 })
 
-export  const {addtobookmark,removebookmark} = Slices.actions;
+export  const {addtobookmark} = Slices.actions;
 
 export default Slices.reducer;

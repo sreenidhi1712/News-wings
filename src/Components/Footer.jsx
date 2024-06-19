@@ -10,7 +10,7 @@ function Footer() {
   return (
     <div className='bottom-0 left-0 fixed w-screen h-10 bg-green-500 flex items-center justify-evenly'>
         <IoMdHome className='h-7 w-7 text-white' onClick={()=>navigate('/')}/>
-        <FaBookmark  className='h-6 w-6 text-white'/>
+        <FaBookmark  className='h-6 w-6 text-white 'onClick={()=>navigate('/bookmark')}/>
         <FaFire className='h-6 w-6 text-white'/>
         <IoIosSearch className='h-7 w-7 text-white'/>
     </div>
