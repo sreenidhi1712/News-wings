@@ -9,7 +9,7 @@ const Navbar = () => {
 
   return (
     <>
-    <nav className={`bg-green-400 w-screen  fixed top-0 left-0  z-10  flex flex-col`}>
+    <nav className={`bg-green-400 w-screen  fixed top-0 left-0  z-10  flex flex-col `}>
             
             <div className="flex justify-between items-center h-[50%] mt-3">
                 <CiMenuFries className="ml-2  h-5  w-5 text-white "/>
