@@ -1,17 +1,23 @@
 import './App.css'
-import Homepage from './Components/Homepage'
-import Navbar from './Components/Navbar'
 import Footer from './Components/Footer'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Maincontent from './Components/Maincontent';
+import Individual from './Components/Individual';
 
 function App() {
   
 
   return (
-    <div className=''>
-     <Navbar/>
-     <Homepage/>
-     <Footer/>
-    </div>
+    <BrowserRouter>
+ 
+         <Routes>
+             <Route path='/' element={<Maincontent/>}/>
+             <Route path='/individual' element={<Individual/>}/>
+         </Routes>
+         <Footer/>
+    
+   
+    </BrowserRouter>
   )
 }
 
