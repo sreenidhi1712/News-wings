@@ -6,6 +6,7 @@ import Individual from './Components/Individual';
 import { BookmarkStore } from './Store-for-redux/Store';
 import Bookmark from './Components/Bookmark';
 import { Provider } from 'react-redux';
+import Category from './Components/Category';
 
 function App() {
   
@@ -17,8 +18,10 @@ function App() {
         <Provider store={BookmarkStore}>
          <Routes>
              <Route path='/' element={<Maincontent/>}/>
-             <Route path='/:articleid' element={<Individual/>}/>
+             <Route path="/category/:categoryName" element={<Category/>} />
+             <Route path="/individual/:itemId" element={<Individual/>} />
              <Route path='/bookmark' element={<Bookmark/>}/>
+             
          </Routes>
          <Footer/>
          </Provider>

@@ -30,7 +30,7 @@ const viewindividual = (items)=>{
              title:"travel"
         },
         { image:"https://images.pexels.com/photos/1034940/pexels-photo-1034940.jpeg?auto=compress&cs=tinysrgb&w=600",
-             title:"Lifestyle"
+             title:"general"
         },
         { image:"https://images.pexels.com/photos/1957478/pexels-photo-1957478.jpeg?auto=compress&cs=tinysrgb&w=600",
              title:"Business"
@@ -97,7 +97,7 @@ const viewindividual = (items)=>{
                <p className='mx-3 font-bold text-xl'>Trending Topic</p>
                <div className={`flex overflow-x-scroll hide-scrollbar w-full `} >
                {trending.map((items)=>(
-                        <div key={items.title} className={`h-32 w-[40%] mt-5 mx-3 flex-shrink-0  bg-slate-200  rounded-lg bg-cover bg-center`} style={{ backgroundImage: `url(${items.image})` }}>
+                        <div key={items.title} onClick={()=>navigate(`/category/${items.title}`)}  className={`h-32 w-[40%] mt-5 mx-3 flex-shrink-0  bg-slate-200  rounded-lg bg-cover bg-center`} style={{ backgroundImage: `url(${items.image})` }}>
                                  <p className='text-white font-bold mt-3 ml-3'>{items.title}</p>
                                 
                         </div>
@@ -106,9 +106,9 @@ const viewindividual = (items)=>{
                </div>
            </div>
 
-           <Cards title={"Headlines"} Category={headlines} addbookmark={addbookmark} Bookmarked={Bookmarked} viewindividual={viewindividual} navigate={navigate} viewarticle={viewarticle}/>
+           <Cards title={"Headlines"} Category={headlines} addbookmark={addbookmark} Bookmarked={Bookmarked} viewindividual={viewindividual} navigate={navigate} />
 
-           <Cards title={"Latest News"} Category={latestNews} addbookmark={addbookmark} Bookmarked={Bookmarked} viewindividual={viewindividual} navigate={navigate} viewarticle={viewarticle}/>
+           <Cards title={"Latest News"} Category={latestNews} addbookmark={addbookmark} Bookmarked={Bookmarked} viewindividual={viewindividual} navigate={navigate} />
           
 
 
@@ -136,7 +136,7 @@ const Cards = ({title,Category,addbookmark,Bookmarked,viewindividual,navigate})=
                                   <button onClick={()=>
                                     {
                                       viewindividual(items);
-                                      navigate(`/${items.title}`)
+                                      navigate(`/individual/${items.title}`)
                                       console.log(items.title)
                                       }}>View More</button>
                                  <FaBookmark className={`${Bookmarked.some((bookmarkedItem) => bookmarkedItem.title === items.title)?`text-red-600`:`text-white`}`} onClick={()=>addbookmark(items)} />
