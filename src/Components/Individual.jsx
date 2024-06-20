@@ -1,26 +1,31 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-
+import { useParams } from 'react-router-dom';
 
 function Individual() {
 
     const navigate = useNavigate();
     const [latestNews, setLatestNews] = useState([]);
     const [news,setNews]= useState([])
+    const {ArticleId} = useParams();
 
     useEffect(()=>{
         const fetchLatestNews = async () => {
-            try {
-              const response = await axios.get(`https://newsapi.org/v2/top-headlines?country=in&category=general&apiKey=4c8372e1b7fa43c9a89c2a176b9461bb&page=1&pageSize=3`);
-              setLatestNews(response.data.articles);
-            } catch (error) {
-              console.error('Error fetching latest news:', error);
-            }
+          try {
+            const response = await axios.get(`https://newsdata.io/api/1/latest?apikey=pub_4678059751b9b341ae3efcfcb16d41ffe79ec&country=in&size=3&image=1&language=en`);
+            setLatestNews(response.data.results);
+          } catch (error) {
+            console.error('Error fetching latest news:', error);
+          }
           };
          const fetchdata = async ()=>{
-              let response = await axios.get('https://newsdata.io/api/1/latest?apikey=pub_4678059751b9b341ae3efcfcb16d41ffe79ec&id=2406e97aaad0574ebeab6eabc23248f7');
-                setNews(response.data.results)
+          try{
+            const response = await axios.get(`https://newsdata.io/api/1/latest?apikey=pub_4678059751b9b341ae3efcfcb16d41ffe79ec&country=in&id=${ArticleId}`)
+            setNews(response.data.results)
+        }catch(error){
+            console.log('Error fetching headlines:', error);
+        }
          }
          fetchdata();
          fetchLatestNews();

@@ -4,13 +4,14 @@ import axios from 'axios';
 import { FaBookmark } from "react-icons/fa";
 import { addtobookmark } from '../Store-for-redux/Addtobookmark';
 import { useDispatch ,useSelector} from 'react-redux';
-
+import { useNavigate } from 'react-router-dom';
+import { viewarticle } from '../Store-for-redux/IndividualArticle';
 
 function Homepage() {
      
   const Bookmarked = useSelector(state=>state.Bookmark)
   const Dispatch  = useDispatch();
-
+  const navigate = useNavigate();
   const addbookmark = (items)=>{
     Dispatch(addtobookmark(items))
   }
@@ -40,28 +41,28 @@ function Homepage() {
   useEffect(() => {
     const fetchLatestNews = async () => {
       try {
-        const response = await axios.get(`https://newsdata.io/api/1/latest?apikey=pub_4678059751b9b341ae3efcfcb16d41ffe79ec&country=in&size=3&image=1`);
+        const response = await axios.get(`https://newsdata.io/api/1/latest?apikey=pub_4678059751b9b341ae3efcfcb16d41ffe79ec&country=in&size=3&image=1&language=en`);
         setLatestNews(response.data.results);
       } catch (error) {
-        console.error('Error fetching latest news:', error);
+        console.log('Error fetching latest news:', error);
       }
     };
 
     const fetchHeadlines = async () => {
       try {
-        const response = await axios.get(`https://newsdata.io/api/1/latest?apikey=pub_4678059751b9b341ae3efcfcb16d41ffe79ec&country=in&size=3&image=1&q=bengaluru`);
+        const response = await axios.get(`https://newsdata.io/api/1/latest?apikey=pub_4678059751b9b341ae3efcfcb16d41ffe79ec&country=in&size=3&image=1&q=bengaluru&language=en`);
         setHeadlines(response.data.results);
       } catch (error) {
-        console.error('Error fetching headlines:', error);
+        console.log('Error fetching headlines:', error);
       }
     };
 
     const fetchdata = async ()=>{
         try{
-            const response = await axios.get('https://newsdata.io/api/1/latest?apikey=pub_4678059751b9b341ae3efcfcb16d41ffe79ec&country=in&category=top&size=3&image=1')
+            const response = await axios.get('https://newsdata.io/api/1/latest?apikey=pub_4678059751b9b341ae3efcfcb16d41ffe79ec&country=in&category=top&size=3&image=1&language=en')
             setNews(response.data.results)
         }catch(error){
-            console.error('Error fetching headlines:', error);
+            console.log('Error fetching headlines:', error);
         }
        
     }
@@ -79,6 +80,7 @@ function Homepage() {
                         <div key={items.title} className={`h-36 w-[85%] mx-3 flex items-end flex-shrink-0 rounded-lg  bg-cover bg-center`} style={{ backgroundImage: `url(${items.image_url})` }}>
                                  <p className='font-bold text-sm text-white  ml-3'>{items.title}</p>
                                  <FaBookmark  className={`${Bookmarked.some((bookmarkedItem) => bookmarkedItem.title === items.title)?`text-red-600 `:`text-white`} h-6 w-6`} onClick={()=>addbookmark(items)} />
+
                         </div>
                      )
                )}
@@ -125,6 +127,12 @@ const Cards = ({title,Category,addbookmark,Bookmarked})=>{
                                  </div>
                                  <div className='h-full w-[65%] '>
                                   <p>{items.title}</p>
+                                  <button onClick={()=>
+                                    {
+                                      Dispatch(viewarticle(items.id))
+                                      navigate(`/${items.id}`)
+                                      console.log(items.id)
+                                      }}>View More</button>
                                  <FaBookmark className={`${Bookmarked.some((bookmarkedItem) => bookmarkedItem.title === items.title)?`text-red-600`:`text-white`}`} onClick={()=>addbookmark(items)} />
                                  </div>
                         </div>

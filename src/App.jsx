@@ -17,7 +17,7 @@ function App() {
         <Provider store={BookmarkStore}>
          <Routes>
              <Route path='/' element={<Maincontent/>}/>
-             <Route path='/individual' element={<Individual/>}/>
+             <Route path='/:articleid' element={<Individual/>}/>
              <Route path='/bookmark' element={<Bookmark/>}/>
          </Routes>
          <Footer/>

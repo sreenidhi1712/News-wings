@@ -4,15 +4,10 @@ import {createSlice} from '@reduxjs/toolkit'
 
  const ArticleIndividual = createSlice({
     name:"ArticleIndividual",
-    initialState:[],
+    initialState:null,
     reducers:{
         viewarticle(state,action) {
-            let index = state.findIndex(item => item.title === action.payload.title);
-            if (index === -1) {
-                state.push(action.payload);
-              } else {
-                state.splice(index, 1);
-              }
+           return action.payload
                   
         },
        
