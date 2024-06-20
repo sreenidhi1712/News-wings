@@ -19,7 +19,7 @@ function Bookmark() {
           {bookmarkState.map((items)=>(
                             <div key={items.title} className={  `h-32 w-[90%]  my-2 bg-slate-200  rounded-lg flex `} >
                                      <div className='h-[100%] w-[35%]  '>
-                                               <img src={items.urlToImage} className='h-full w-full object-cover rounded-lg'/>
+                                               <img src={items.image_url} className='h-full w-full object-cover rounded-lg'/>
                                      </div>
                                      <div className='h-full w-[65%] flex flex-col'>
                                       <div className='h-[80%] w-full '>

@@ -40,8 +40,8 @@ function Homepage() {
   useEffect(() => {
     const fetchLatestNews = async () => {
       try {
-        const response = await axios.get(`https://newsapi.org/v2/top-headlines?country=in&category=general&apiKey=4c8372e1b7fa43c9a89c2a176b9461bb&page=1&pageSize=3`);
-        setLatestNews(response.data.articles);
+        const response = await axios.get(`https://newsdata.io/api/1/latest?apikey=pub_4678059751b9b341ae3efcfcb16d41ffe79ec&country=in&size=3&image=1`);
+        setLatestNews(response.data.results);
       } catch (error) {
         console.error('Error fetching latest news:', error);
       }
@@ -49,8 +49,8 @@ function Homepage() {
 
     const fetchHeadlines = async () => {
       try {
-        const response = await axios.get(`https://newsapi.org/v2/top-headlines?country=in&category=business&apiKey=4c8372e1b7fa43c9a89c2a176b9461bb&page=1&pageSize=3`);
-        setHeadlines(response.data.articles);
+        const response = await axios.get(`https://newsdata.io/api/1/latest?apikey=pub_4678059751b9b341ae3efcfcb16d41ffe79ec&country=in&size=3&image=1&q=bengaluru`);
+        setHeadlines(response.data.results);
       } catch (error) {
         console.error('Error fetching headlines:', error);
       }
@@ -58,8 +58,8 @@ function Homepage() {
 
     const fetchdata = async ()=>{
         try{
-            const response = await axios.get('https://newsapi.org/v2/top-headlines?country=in&apiKey=4c8372e1b7fa43c9a89c2a176b9461bb&page=1&pagesize=3')
-            setNews(response.data.articles)
+            const response = await axios.get('https://newsdata.io/api/1/latest?apikey=pub_4678059751b9b341ae3efcfcb16d41ffe79ec&country=in&category=top&size=3&image=1')
+            setNews(response.data.results)
         }catch(error){
             console.error('Error fetching headlines:', error);
         }
@@ -76,7 +76,7 @@ function Homepage() {
 {/* news cards  https://newsapi.org/v2/top-headlines?country=us&apiKey=4c8372e1b7fa43c9a89c2a176b9461bb */}
            <div className='flex overflow-x-scroll hide-scrollbar w-full  mt-28   '> 
                {news.map((items)=>(
-                        <div key={items.title} className={`h-36 w-[85%] mx-3 flex items-end flex-shrink-0 rounded-lg  bg-cover bg-center`} style={{ backgroundImage: `url(${items.urlToImage})` }}>
+                        <div key={items.title} className={`h-36 w-[85%] mx-3 flex items-end flex-shrink-0 rounded-lg  bg-cover bg-center`} style={{ backgroundImage: `url(${items.image_url})` }}>
                                  <p className='font-bold text-sm text-white  ml-3'>{items.title}</p>
                                  <FaBookmark  className={`${Bookmarked.some((bookmarkedItem) => bookmarkedItem.title === items.title)?`text-red-600 `:`text-white`} h-6 w-6`} onClick={()=>addbookmark(items)} />
                         </div>
@@ -121,9 +121,10 @@ const Cards = ({title,Category,addbookmark,Bookmarked})=>{
                {Category.map((items)=>(
                         <div key={items.title} className={  `h-32 w-[90%]  my-2 bg-slate-200  rounded-lg flex `} >
                                  <div className='h-[100%] w-[35%]  '>
-                                           <img src={items.urlToImage} className='h-full w-full object-contain '/>
+                                           <img src={items.image_url} className='h-full w-full object-contain '/>
                                  </div>
                                  <div className='h-full w-[65%] '>
+                                  <p>{items.title}</p>
                                  <FaBookmark className={`${Bookmarked.some((bookmarkedItem) => bookmarkedItem.title === items.title)?`text-red-600`:`text-white`}`} onClick={()=>addbookmark(items)} />
                                  </div>
                         </div>
