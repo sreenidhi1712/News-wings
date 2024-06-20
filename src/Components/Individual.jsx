@@ -1,28 +1,33 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 
-function Individual() {
 
-    const navigate = useNavigate();
+function Individual() {
+     const Indiviarticle = useSelector(state=>state.Article)
+    // const navigate = useNavigate();
     const [latestNews, setLatestNews] = useState([]);
     const [news,setNews]= useState([])
-    const {ArticleId} = useParams();
+    // const {ArticleId} = useParams();
+    const url = `https://newsapi.org/v2/top-headlines?category=general&apiKey=d3952cc9efb9478ebe65bb150ffe954c&pageSize=3&language=en&page=1`;
+const latesturl = `https://newsapi.org/v2/top-headlines?category=general&apiKey=d3952cc9efb9478ebe65bb150ffe954c&pageSize=3&language=en&page=2`;
+const headlineurl = `https://newsapi.org/v2/top-headlines?category=general&apiKey=d3952cc9efb9478ebe65bb150ffe954c&pageSize=3&language=en&page=3`;
 
     useEffect(()=>{
         const fetchLatestNews = async () => {
           try {
-            const response = await axios.get(`https://newsdata.io/api/1/latest?apikey=pub_4678059751b9b341ae3efcfcb16d41ffe79ec&country=in&size=3&image=1&language=en`);
-            setLatestNews(response.data.results);
+            const response = await axios.get(url);
+            setLatestNews(response.data.articles);
           } catch (error) {
             console.error('Error fetching latest news:', error);
           }
           };
          const fetchdata = async ()=>{
           try{
-            const response = await axios.get(`https://newsdata.io/api/1/latest?apikey=pub_4678059751b9b341ae3efcfcb16d41ffe79ec&country=in&id=${ArticleId}`)
-            setNews(response.data.results)
+            const response = await axios.get(latesturl)
+            setNews(response.data.articles)
         }catch(error){
             console.log('Error fetching headlines:', error);
         }
@@ -34,23 +39,22 @@ function Individual() {
   return (
     <>
    
-    {news.map((items)=>(
+    {Indiviarticle.map((item)=>(
 <div className='h-screen w-screen flex flex-col items-center overflow-x-hidden ' >
     <div className='h-14 w-full flex items-center  justify-center bg-slate-400'>
      
         <p className='py-5 font-bold text-white '>News Details</p>
     </div>
             <div className=' '>
-                    <p className='font-bold mx-3'>{items.title}</p>
+                    <p className='font-bold mx-3'>{item.title}</p>
             </div>
             <div className=' w-[90%] h-[20%] mt-3'>
-                <img className='h-full w-full object-cover object-center' src="https://images.pexels.com/photos/18592009/pexels-photo-18592009/free-photo-of-a-view-of-the-city-with-many-red-roofs.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load"/>
+                <img className='h-full w-full object-cover object-center' src={item.urlToImage}/>
 
             </div>
             <div className='w-[98%] mt-5'>
-            {items.content.split('. ').map((sentence, idx) => (
-                            <p key={idx} className='text-justify mb-2'>{sentence}.</p>
-                        ))}
+                            <p className='text-justify mb-2'>{item.description}.</p>
+                       
             </div>
     </div>
     ))}

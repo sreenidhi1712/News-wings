@@ -4,11 +4,14 @@ import {createSlice} from '@reduxjs/toolkit'
 
  const ArticleIndividual = createSlice({
     name:"ArticleIndividual",
-    initialState:null,
+    initialState:[],
     reducers:{
         viewarticle(state,action) {
-           return action.payload
-                  
+            if(state.length >=1){
+                state.pop()
+            
+            }
+            state.push(action.payload)           
         },
        
 

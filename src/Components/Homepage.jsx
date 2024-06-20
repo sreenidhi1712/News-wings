@@ -10,12 +10,18 @@ import { viewarticle } from '../Store-for-redux/IndividualArticle';
 function Homepage() {
      
   const Bookmarked = useSelector(state=>state.Bookmark)
-  const Dispatch  = useDispatch();
+  const Dispatcher  = useDispatch();
   const navigate = useNavigate();
   const addbookmark = (items)=>{
-    Dispatch(addtobookmark(items))
+    Dispatcher(addtobookmark(items))
   }
+const viewindividual = (items)=>{
+  Dispatcher(viewarticle(items))
+}
 
+  const url = `https://newsapi.org/v2/top-headlines?category=general&apiKey=d3952cc9efb9478ebe65bb150ffe954c&pageSize=3&language=en&page=1`;
+  const latesturl = `https://newsapi.org/v2/top-headlines?category=general&apiKey=d3952cc9efb9478ebe65bb150ffe954c&pageSize=3&language=en&page=2`;
+  const headlineurl = `https://newsapi.org/v2/top-headlines?category=general&apiKey=d3952cc9efb9478ebe65bb150ffe954c&pageSize=3&language=en&page=3`;
     const trending = [
         {image:"https://images.pexels.com/photos/209977/pexels-photo-209977.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
          title:"Sports"
@@ -41,8 +47,8 @@ function Homepage() {
   useEffect(() => {
     const fetchLatestNews = async () => {
       try {
-        const response = await axios.get(`https://newsdata.io/api/1/latest?apikey=pub_4678059751b9b341ae3efcfcb16d41ffe79ec&country=in&size=3&image=1&language=en`);
-        setLatestNews(response.data.results);
+        const response = await axios.get(latesturl);
+        setLatestNews(response.data.articles);
       } catch (error) {
         console.log('Error fetching latest news:', error);
       }
@@ -50,8 +56,8 @@ function Homepage() {
 
     const fetchHeadlines = async () => {
       try {
-        const response = await axios.get(`https://newsdata.io/api/1/latest?apikey=pub_4678059751b9b341ae3efcfcb16d41ffe79ec&country=in&size=3&image=1&q=bengaluru&language=en`);
-        setHeadlines(response.data.results);
+        const response = await axios.get(headlineurl);
+        setHeadlines(response.data.articles);
       } catch (error) {
         console.log('Error fetching headlines:', error);
       }
@@ -59,8 +65,8 @@ function Homepage() {
 
     const fetchdata = async ()=>{
         try{
-            const response = await axios.get('https://newsdata.io/api/1/latest?apikey=pub_4678059751b9b341ae3efcfcb16d41ffe79ec&country=in&category=top&size=3&image=1&language=en')
-            setNews(response.data.results)
+            const response = await axios.get(url)
+            setNews(response.data.articles)
         }catch(error){
             console.log('Error fetching headlines:', error);
         }
@@ -77,7 +83,7 @@ function Homepage() {
 {/* news cards  https://newsapi.org/v2/top-headlines?country=us&apiKey=4c8372e1b7fa43c9a89c2a176b9461bb */}
            <div className='flex overflow-x-scroll hide-scrollbar w-full  mt-28   '> 
                {news.map((items)=>(
-                        <div key={items.title} className={`h-36 w-[85%] mx-3 flex items-end flex-shrink-0 rounded-lg  bg-cover bg-center`} style={{ backgroundImage: `url(${items.image_url})` }}>
+                        <div key={items.title} className={`h-36 w-[85%] mx-3 flex items-end flex-shrink-0 rounded-lg  bg-cover bg-center`} style={{ backgroundImage: `url(${items.urlToImage})` }}>
                                  <p className='font-bold text-sm text-white  ml-3'>{items.title}</p>
                                  <FaBookmark  className={`${Bookmarked.some((bookmarkedItem) => bookmarkedItem.title === items.title)?`text-red-600 `:`text-white`} h-6 w-6`} onClick={()=>addbookmark(items)} />
 
@@ -100,9 +106,9 @@ function Homepage() {
                </div>
            </div>
 
-           <Cards title={"Headlines"} Category={headlines} addbookmark={addbookmark} Bookmarked={Bookmarked}/>
+           <Cards title={"Headlines"} Category={headlines} addbookmark={addbookmark} Bookmarked={Bookmarked} viewindividual={viewindividual} navigate={navigate} viewarticle={viewarticle}/>
 
-           <Cards title={"Latest News"} Category={latestNews} addbookmark={addbookmark} Bookmarked={Bookmarked}/>
+           <Cards title={"Latest News"} Category={latestNews} addbookmark={addbookmark} Bookmarked={Bookmarked} viewindividual={viewindividual} navigate={navigate} viewarticle={viewarticle}/>
           
 
 
@@ -114,7 +120,7 @@ export default Homepage
 
 
 
-const Cards = ({title,Category,addbookmark,Bookmarked})=>{
+const Cards = ({title,Category,addbookmark,Bookmarked,viewindividual,navigate})=>{
     return <>
      {/* headlines */} 
     <div className='flex flex-col w-full mt-5'>
@@ -123,15 +129,15 @@ const Cards = ({title,Category,addbookmark,Bookmarked})=>{
                {Category.map((items)=>(
                         <div key={items.title} className={  `h-32 w-[90%]  my-2 bg-slate-200  rounded-lg flex `} >
                                  <div className='h-[100%] w-[35%]  '>
-                                           <img src={items.image_url} className='h-full w-full object-contain '/>
+                                           <img src={items.urlToImage} className='h-full w-full object-contain '/>
                                  </div>
                                  <div className='h-full w-[65%] '>
                                   <p>{items.title}</p>
                                   <button onClick={()=>
                                     {
-                                      Dispatch(viewarticle(items.id))
-                                      navigate(`/${items.id}`)
-                                      console.log(items.id)
+                                      viewindividual(items);
+                                      navigate(`/${items.title}`)
+                                      console.log(items.title)
                                       }}>View More</button>
                                  <FaBookmark className={`${Bookmarked.some((bookmarkedItem) => bookmarkedItem.title === items.title)?`text-red-600`:`text-white`}`} onClick={()=>addbookmark(items)} />
                                  </div>
