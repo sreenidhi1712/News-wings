@@ -58,7 +58,7 @@ const Cards = ({title,Category,addbookmark,Bookmarked,viewindividual,navigate})=
                                   <button onClick={()=>
                                     {
                                       viewindividual(items);
-                                      navigate(`/${items.title}`)
+                                      navigate(`/individual/${items.title}`)
                                       console.log(items.title)
                                       }}>View More</button>
                                  <FaBookmark className={`${Bookmarked.some((bookmarkedItem) => bookmarkedItem.title === items.title)?`text-red-600`:`text-white`}`} onClick={()=>addbookmark(items)} />
