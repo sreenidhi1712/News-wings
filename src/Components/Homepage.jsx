@@ -7,6 +7,7 @@ import { useDispatch ,useSelector} from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { viewarticle } from '../Store-for-redux/IndividualArticle';
 
+
 function Homepage() {
      
   const Bookmarked = useSelector(state=>state.Bookmark)
@@ -19,7 +20,7 @@ const viewindividual = (items)=>{
   Dispatcher(viewarticle(items))
 }
 
-  const url = `https://newsapi.org/v2/top-headlines?category=general&apiKey=d3952cc9efb9478ebe65bb150ffe954c&pageSize=3&language=en&page=1`;
+  const url = `https://newsapi.org/v2/top-headlines?category=general&apiKey=d3952cc9efb9478ebe65bb150ffe954c&pageSize=3&language=en&page=5`;
   const latesturl = `https://newsapi.org/v2/top-headlines?category=general&apiKey=d3952cc9efb9478ebe65bb150ffe954c&pageSize=3&language=en&page=2`;
   const headlineurl = `https://newsapi.org/v2/top-headlines?category=general&apiKey=d3952cc9efb9478ebe65bb150ffe954c&pageSize=3&language=en&page=3`;
     const trending = [
@@ -44,37 +45,21 @@ const viewindividual = (items)=>{
     const [latestNews, setLatestNews] = useState([]);
   const [headlines, setHeadlines] = useState([]);
 
-  useEffect(() => {
-    const fetchLatestNews = async () => {
-      try {
-        const response = await axios.get(latesturl);
-        setLatestNews(response.data.articles);
-      } catch (error) {
-        console.log('Error fetching latest news:', error);
-      }
-    };
-
-    const fetchHeadlines = async () => {
-      try {
-        const response = await axios.get(headlineurl);
-        setHeadlines(response.data.articles);
-      } catch (error) {
-        console.log('Error fetching headlines:', error);
-      }
-    };
-
-    const fetchdata = async ()=>{
-        try{
-            const response = await axios.get(url)
-            setNews(response.data.articles)
-        }catch(error){
-            console.log('Error fetching headlines:', error);
-        }
-       
+  const fetchdata =  async (urls,setFunction)=>{
+    try {
+      const response = await axios.get(urls);
+      setFunction(response.data.articles);
+    } catch (error) {
+      console.log('Error fetching latest news:', error);
     }
-    fetchdata();
-    fetchLatestNews();
-    fetchHeadlines();
+  }
+
+  useEffect(() => {
+
+    fetchdata(latesturl,setLatestNews);
+    fetchdata(headlineurl,setHeadlines);
+    fetchdata(url,setNews)
+   
   }, []);
 
    
@@ -83,9 +68,19 @@ const viewindividual = (items)=>{
 {/* news cards  https://newsapi.org/v2/top-headlines?country=us&apiKey=4c8372e1b7fa43c9a89c2a176b9461bb */}
            <div className='flex overflow-x-scroll hide-scrollbar w-full  mt-28   '> 
                {news.map((items)=>(
-                        <div key={items.title} className={`h-36 w-[85%] mx-3 flex items-end flex-shrink-0 rounded-lg  bg-cover bg-center`} style={{ backgroundImage: `url(${items.urlToImage})` }}>
-                                 <p className='font-bold text-sm text-white  ml-3'>{items.title}</p>
-                                 <FaBookmark  className={`${Bookmarked.some((bookmarkedItem) => bookmarkedItem.title === items.title)?`text-red-600 `:`text-white`} h-6 w-6`} onClick={()=>addbookmark(items)} />
+                        <div key={items.title} className={`h-36 w-[85%] mx-3 flex flex-col justify-end flex-shrink-0 rounded-lg  bg-cover bg-center`} style={{ backgroundImage: `url(${items.urlToImage})` }}>
+                                <div className='mb-2'>
+                                <p className='font-bold text-sm text-white  ml-3'>{items.title}</p>
+                                </div>
+                                 <div className='flex w-full h-[25%]  justify-between'>
+                                  <button onClick={()=>
+                                    {
+                                      viewindividual(items);
+                                      navigate(`/individual/${items.title}`)
+                                      console.log(items.title)
+                                      }} className='h-[80%] w-[30%] rounded-md text-amber-50 ml-3 bg-green-500' >View More</button>
+                                 <FaBookmark className={`${Bookmarked.some((bookmarkedItem) => bookmarkedItem.title === items.title)?`text-red-600`:`text-gray-500`} mr-2 mt-1 h-5 w-5`} onClick={()=>addbookmark(items)} />
+                                  </div>
 
                         </div>
                      )
@@ -127,19 +122,21 @@ const Cards = ({title,Category,addbookmark,Bookmarked,viewindividual,navigate})=
                <p className='mx-3 font-bold text-xl'>{title}</p>
                <div className={`flex flex-col w-full items-center `} >
                {Category.map((items)=>(
-                        <div key={items.title} className={  `h-32 w-[90%]  my-2 bg-slate-200  rounded-lg flex `} >
-                                 <div className='h-[100%] w-[35%]  '>
+                        <div key={items.title} className={  `h-60 w-[90%]  my-2 bg-slate-200  rounded-lg flex flex-col`} >
+                                 <div className='h-[50%] w-[100%]  '>
                                            <img src={items.urlToImage} className='h-full w-full object-contain '/>
                                  </div>
-                                 <div className='h-full w-[65%] '>
-                                  <p>{items.title}</p>
+                                 <div className='h-[50%] w-[100%] flex flex-col justify-between'>
+                                  <p className='text-sm'>{items.title}</p>
+                                  <div className='flex w-full h-[30%]  justify-between'>
                                   <button onClick={()=>
                                     {
                                       viewindividual(items);
                                       navigate(`/individual/${items.title}`)
                                       console.log(items.title)
-                                      }}>View More</button>
-                                 <FaBookmark className={`${Bookmarked.some((bookmarkedItem) => bookmarkedItem.title === items.title)?`text-red-600`:`text-white`}`} onClick={()=>addbookmark(items)} />
+                                      }} className='h-[80%] w-[30%] rounded-md text-amber-50 ml-3 bg-green-500' >View More</button>
+                                 <FaBookmark className={`${Bookmarked.some((bookmarkedItem) => bookmarkedItem.title === items.title)?`text-red-600`:`text-gray-500`} mr-2 mt-1 h-5 w-5`} onClick={()=>addbookmark(items)} />
+                                  </div>
                                  </div>
                         </div>
                      )
