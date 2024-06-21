@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { FaBookmark } from "react-icons/fa";
 import { addtobookmark } from '../Store-for-redux/Addtobookmark';
 import { useDispatch ,useSelector} from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -11,12 +10,13 @@ function Category() {
 
   const [page,setPage] = useState(0)
     const {categoryName} = useParams();
-    const url = `https://newsapi.org/v2/top-headlines?category=${categoryName}&apiKey=4c8372e1b7fa43c9a89c2a176b9461bb&pageSize=5&language=en&page=${page}`
+    const url = `https://newsapi.org/v2/top-headlines?category=${categoryName}&apiKey=78874218049046c794b765da01425361&pageSize=5&language=en&page=${page}`
     const [news,setNews] = useState([])
     const Bookmarked = useSelector(state=>state.Bookmark)
     const Dispatcher  = useDispatch();
     const navigate = useNavigate();
     const addbookmark = (items)=>{
+      // sessionStorage.setItem('bookmarkedData', JSON.stringify(items));
         Dispatcher(addtobookmark(items))
       }
     const viewindividual = (items)=>{

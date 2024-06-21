@@ -8,6 +8,7 @@ import Bookmark from './Components/Bookmark';
 import { Provider } from 'react-redux';
 import Category from './Components/Category';
 import About from './Components/About';
+import Gotowebsite from './Components/Gotowebsite';
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
              <Route path="/individual/:itemId" element={<Individual/>} />
              <Route path='/bookmark' element={<Bookmark/>}/>
              <Route path='/aboutus' element={<About/>}/>
+             <Route path="/gotoweb/:outsidewebsite" element={<Gotowebsite/>}/>
          </Routes>
          <Footer/>
          </Provider>

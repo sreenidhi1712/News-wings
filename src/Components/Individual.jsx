@@ -11,9 +11,11 @@ import Cards from './Cards';
 function Individual() {
 
   const Bookmarked = useSelector(state=>state.Bookmark)
+  
   const Dispatcher  = useDispatch();
   const navigate = useNavigate();
   const addbookmark = (items)=>{
+    // sessionStorage.setItem('bookmarkedData', JSON.stringify(items));
     Dispatcher(addtobookmark(items))
   }
 const viewindividual = (items)=>{
@@ -26,10 +28,10 @@ const viewindividual = (items)=>{
    
     const fetchrelated = ()=>{
       // Indiviarticle.map((items)=>{setRelated(items.title)})
-      setRelated('general')
+      setRelated('top')
     }
      // const {ArticleId} = useParams();
-    const url = `https://newsdata.io/api/1/latest?apikey=pub_46898b8ae28dc8cb31b1a1275d13b167dde4f&category=${related}`;
+    const url = `https://newsdata.io/api/1/latest?apikey=pub_470053a94febd51cb9c0059d850ccd9e7a46d&category=top&image=1&size=3&q=india&language=en`;
 
     useEffect(()=>{
         const fetchrelatedNews = async () => {
@@ -47,8 +49,14 @@ const viewindividual = (items)=>{
 
     },[])
 
+
+    const handleNavigate = (item) => {
+      const encodedUrl = encodeURIComponent(item.link);
+      navigate(`/gotoweb/${encodedUrl}`);
+    };
+
   return (
-    <>
+    <div className='mb-10'>
    
     {Indiviarticle.map((item)=>(
 <div className='h-screen w-screen flex flex-col items-center overflow-x-hidden mb-14' key={item.title}>
@@ -60,11 +68,12 @@ const viewindividual = (items)=>{
                     <p className='font-bold mx-3'>{item.title}</p>
             </div>
             <div className=' w-[90%] h-[20%] mt-3'>
-                <img className='h-full w-full object-cover object-center' src={item.image_url}/>
+                <img className='h-full w-full object-cover object-center' src={item.image_url?item.image_url:item.urlToImage}/>
 
             </div>
             <div className='w-[98%] mt-5'>
                             <p className='text-justify mb-2'>{item.description}.</p>
+                            <p className='font-bold text-green' onClick={()=>handleNavigate(item)}>Visit  Website</p>
                        
             </div>
     </div>
@@ -72,7 +81,7 @@ const viewindividual = (items)=>{
           
           <Cards title={"Related News"} Category={latestNews} addbookmark={addbookmark} Bookmarked={Bookmarked} viewindividual={viewindividual} navigate={navigate} />
 
-     </>
+     </div>
   )
 }
 
