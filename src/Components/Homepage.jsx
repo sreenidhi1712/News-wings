@@ -21,15 +21,15 @@ const viewindividual = (items)=>{
   Dispatcher(viewarticle(items))
 }
 
-  const url = `https://newsapi.org/v2/top-headlines?category=general&apiKey=d3952cc9efb9478ebe65bb150ffe954c&pageSize=3&language=en&page=5`;
-  const latesturl = `https://newsapi.org/v2/top-headlines?category=general&apiKey=d3952cc9efb9478ebe65bb150ffe954c&pageSize=3&language=en&page=2`;
-  const headlineurl = `https://newsapi.org/v2/top-headlines?category=general&apiKey=d3952cc9efb9478ebe65bb150ffe954c&pageSize=3&language=en&page=3`;
-    const trending = [
+  const url = `https://newsapi.org/v2/everything?q=politics&apiKey=4c8372e1b7fa43c9a89c2a176b9461bb&pageSize=3&language=en&page=5`;
+  const latesturl = `https://newsapi.org/v2/top-headlines?category=general&apiKey=4c8372e1b7fa43c9a89c2a176b9461bb&pageSize=3&language=en&page=2`;
+  const headlineurl = `https://newsapi.org/v2/top-headlines?category=general&apiKey=4c8372e1b7fa43c9a89c2a176b9461bb&pageSize=3&language=en&page=3`;
+  const trending = [
         {image:"https://images.pexels.com/photos/209977/pexels-photo-209977.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
          title:"Sports"
         },
         { image:"https://images.pexels.com/photos/346885/pexels-photo-346885.jpeg?auto=compress&cs=tinysrgb&w=600",
-             title:"travel"
+             title:"politics"
         },
         { image:"https://images.pexels.com/photos/1034940/pexels-photo-1034940.jpeg?auto=compress&cs=tinysrgb&w=600",
              title:"general"
@@ -78,7 +78,6 @@ const viewindividual = (items)=>{
                                     {
                                       viewindividual(items);
                                       navigate(`/individual/${items.title}`)
-                                      console.log(items.title)
                                       }} className='h-[80%] w-[30%] rounded-md text-amber-50 ml-3 bg-green-500' >View More</button>
                                  <FaBookmark className={`${Bookmarked.some((bookmarkedItem) => bookmarkedItem.title === items.title)?`text-red-600`:`text-gray-500`} mr-2 mt-1 h-5 w-5`} onClick={()=>addbookmark(items)} />
                                   </div>

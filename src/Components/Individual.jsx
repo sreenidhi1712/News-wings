@@ -1,22 +1,39 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
+import { addtobookmark } from '../Store-for-redux/Addtobookmark';
+import { useDispatch ,useSelector} from 'react-redux';
+import { viewarticle } from '../Store-for-redux/IndividualArticle';
+import Cards from './Cards';
 
 
 function Individual() {
+
+  const Bookmarked = useSelector(state=>state.Bookmark)
+  const Dispatcher  = useDispatch();
+  const navigate = useNavigate();
+  const addbookmark = (items)=>{
+    Dispatcher(addtobookmark(items))
+  }
+const viewindividual = (items)=>{
+  Dispatcher(viewarticle(items))
+}
      const Indiviarticle = useSelector(state=>state.Article)
     // const navigate = useNavigate();
     const [latestNews, setLatestNews] = useState([]);
-    const [news,setNews]= useState([])
-    // const {ArticleId} = useParams();
-    const url = `https://newsapi.org/v2/top-headlines?category=general&apiKey=d3952cc9efb9478ebe65bb150ffe954c&pageSize=3&language=en&page=1`;
-const latesturl = `https://newsapi.org/v2/top-headlines?category=general&apiKey=d3952cc9efb9478ebe65bb150ffe954c&pageSize=3&language=en&page=2`;
-const headlineurl = `https://newsapi.org/v2/top-headlines?category=general&apiKey=d3952cc9efb9478ebe65bb150ffe954c&pageSize=3&language=en&page=3`;
+    const [related,setRelated] = useState('')
+   
+    const fetchrelated = ()=>{
+      // Indiviarticle.map((items)=>{setRelated(items.title)})
+      setRelated('general')
+    }
+     // const {ArticleId} = useParams();
+    const url = `https://newsapi.org/v2/top-headlines?apiKey=4c8372e1b7fa43c9a89c2a176b9461bb&pageSize=3&language=en&page=7&category=${related}`;
 
     useEffect(()=>{
-        const fetchLatestNews = async () => {
+        const fetchrelatedNews = async () => {
+          fetchrelated();
           try {
             const response = await axios.get(url);
             setLatestNews(response.data.articles);
@@ -24,23 +41,17 @@ const headlineurl = `https://newsapi.org/v2/top-headlines?category=general&apiKe
             console.error('Error fetching latest news:', error);
           }
           };
-         const fetchdata = async ()=>{
-          try{
-            const response = await axios.get(latesturl)
-            setNews(response.data.articles)
-        }catch(error){
-            console.log('Error fetching headlines:', error);
-        }
-         }
-         fetchdata();
-         fetchLatestNews();
+          fetchrelatedNews();
+         
+         
+
     },[])
 
   return (
     <>
    
     {Indiviarticle.map((item)=>(
-<div className='h-screen w-screen flex flex-col items-center overflow-x-hidden ' >
+<div className='h-screen w-screen flex flex-col items-center overflow-x-hidden mb-14' key={item.title}>
     <div className='h-14 w-full flex items-center  justify-center bg-slate-400'>
      
         <p className='py-5 font-bold text-white '>News Details</p>
@@ -58,8 +69,8 @@ const headlineurl = `https://newsapi.org/v2/top-headlines?category=general&apiKe
             </div>
     </div>
     ))}
-          <Cards title={"LatestNews"} Category={latestNews}/>
-        
+          
+          <Cards title={"Related News"} Category={latestNews} addbookmark={addbookmark} Bookmarked={Bookmarked} viewindividual={viewindividual} navigate={navigate} />
 
      </>
   )
@@ -69,26 +80,3 @@ export default Individual
 
 
 
-const Cards = ({title,Category})=>{
-    return <>
-     {/* headlines */} 
-    <div className='flex flex-col w-full mt-5 mb-10'>
-               <p className='mx-3 font-bold text-xl'>{title}</p>
-               <div className={`flex flex-col w-full items-center `} >
-               {Category.map((items)=>(
-                        <div className={  `h-32 w-[90%]  my-2 bg-slate-200  rounded-lg flex `}>
-                                 <div className='h-[100%] w-[35%]  '>
-                                           <img src={items.urlToImage} className='h-full w-full object-contain '/>
-                                 </div>
-                                 <div className='h-full w-[65%] '>
-                                        
-                                 </div>
-                        </div>
-                     )
-               )}
-               </div>
-           </div>
-   
-
-    </>
-}

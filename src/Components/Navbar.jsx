@@ -19,7 +19,7 @@ const Navbar = () => {
 
             <div className="h-[50%] mt-5 overflow-x-scroll hide-scrollbar mb-2"> {/* Component for  category options*/}
                 <ul className="flex justify-around gap-4 items-center text-white">
-                    <li className="font-bold text-sm ml-1" onClick={()=>navigate('/category/Latest')}>Latest</li>
+                    <li className="font-bold text-sm ml-1" onClick={()=>navigate('/category/general')}>Latest</li>
                     <li className="font-bold text-sm" onClick={()=>navigate('/category/Business')}>Business</li>
                     <li className="font-bold text-sm" onClick={()=>navigate('/category/Tech')}>Tech</li>
                     <li className="font-bold text-sm" onClick={()=>navigate('/category/Entertainment')}>Entertainment</li>
