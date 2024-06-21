@@ -20,10 +20,14 @@ function Homepage() {
 const viewindividual = (items)=>{
   Dispatcher(viewarticle(items))
 }
-
-  const url = `https://newsapi.org/v2/everything?q=politics&apiKey=4c8372e1b7fa43c9a89c2a176b9461bb&pageSize=3&language=en&page=5`;
-  const latesturl = `https://newsapi.org/v2/top-headlines?category=general&apiKey=4c8372e1b7fa43c9a89c2a176b9461bb&pageSize=3&language=en&page=2`;
-  const headlineurl = `https://newsapi.org/v2/top-headlines?category=general&apiKey=4c8372e1b7fa43c9a89c2a176b9461bb&pageSize=3&language=en&page=3`;
+//newsapi.org
+  // const url = `https://newsapi.org/v2/everything?q=politics&apiKey=4c8372e1b7fa43c9a89c2a176b9461bb&pageSize=3&language=en&page=5`;
+  // const latesturl = `https://newsapi.org/v2/top-headlines?category=general&apiKey=4c8372e1b7fa43c9a89c2a176b9461bb&pageSize=3&language=en&page=2`;
+  // const headlineurl = `https://newsapi.org/v2/top-headlines?category=general&apiKey=4c8372e1b7fa43c9a89c2a176b9461bb&pageSize=3&language=en&page=3`;
+//newsorg.io
+  const url = `https://newsdata.io/api/1/latest?apikey=pub_46898b8ae28dc8cb31b1a1275d13b167dde4f&category=sports`;
+  const latesturl = `https://newsdata.io/api/1/latest?apikey=pub_46898b8ae28dc8cb31b1a1275d13b167dde4f&q=covid&size=3&country=in`;
+  const headlineurl = `https://newsdata.io/api/1/latest?apikey=pub_46898b8ae28dc8cb31b1a1275d13b167dde4f&category=top&size=3&country=in`;
   const trending = [
         {image:"https://images.pexels.com/photos/209977/pexels-photo-209977.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
          title:"Sports"
@@ -49,7 +53,7 @@ const viewindividual = (items)=>{
   const fetchdata =  async (urls,setFunction)=>{
     try {
       const response = await axios.get(urls);
-      setFunction(response.data.articles);
+      setFunction(response.data.results);
     } catch (error) {
       console.log('Error fetching latest news:', error);
     }
@@ -69,7 +73,7 @@ const viewindividual = (items)=>{
 {/* news cards  https://newsapi.org/v2/top-headlines?country=us&apiKey=4c8372e1b7fa43c9a89c2a176b9461bb */}
            <div className='flex overflow-x-scroll hide-scrollbar w-full  mt-28   '> 
                {news.map((items)=>(
-                        <div key={items.title} className={`h-36 w-[85%] mx-3 flex flex-col justify-end flex-shrink-0 rounded-lg  bg-cover bg-center`} style={{ backgroundImage: `url(${items.urlToImage})` }}>
+                        <div key={items.title} className={`h-36 w-[85%] mx-3 flex flex-col justify-end flex-shrink-0 rounded-lg  bg-cover bg-center`} style={{ backgroundImage: `url(${items.image_url})` }}>
                                 <div className='mb-2'>
                                 <p className='font-bold text-sm text-white  ml-3'>{items.title}</p>
                                 </div>

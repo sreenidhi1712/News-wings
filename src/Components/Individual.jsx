@@ -29,14 +29,14 @@ const viewindividual = (items)=>{
       setRelated('general')
     }
      // const {ArticleId} = useParams();
-    const url = `https://newsapi.org/v2/top-headlines?apiKey=4c8372e1b7fa43c9a89c2a176b9461bb&pageSize=3&language=en&page=7&category=${related}`;
+    const url = `https://newsdata.io/api/1/latest?apikey=pub_46898b8ae28dc8cb31b1a1275d13b167dde4f&category=${related}`;
 
     useEffect(()=>{
         const fetchrelatedNews = async () => {
           fetchrelated();
           try {
             const response = await axios.get(url);
-            setLatestNews(response.data.articles);
+            setLatestNews(response.data.results);
           } catch (error) {
             console.error('Error fetching latest news:', error);
           }
@@ -60,7 +60,7 @@ const viewindividual = (items)=>{
                     <p className='font-bold mx-3'>{item.title}</p>
             </div>
             <div className=' w-[90%] h-[20%] mt-3'>
-                <img className='h-full w-full object-cover object-center' src={item.urlToImage}/>
+                <img className='h-full w-full object-cover object-center' src={item.image_url}/>
 
             </div>
             <div className='w-[98%] mt-5'>

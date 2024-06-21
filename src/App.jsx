@@ -9,6 +9,7 @@ import { Provider } from 'react-redux';
 import Category from './Components/Category';
 import About from './Components/About';
 
+
 function App() {
   
 

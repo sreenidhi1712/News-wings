@@ -16,7 +16,7 @@ const Navbar = () => {
                
                 <h1 className='text-white text-lg font-bold text-center ml-2'>News Wing</h1>
                 <div className="flex w-[60%] h-8  rounded-lg items-center ">
-                  <input type="text" placeholder="search here..." className="outline-none rounded-l-lg w-[80%] h-[100%] placeholder:px-3 placeholder:text-black"  />
+                  <input type="text" placeholder="search here..." className="outline-none px-2 rounded-l-lg w-[80%] h-[100%] placeholder:px-3 placeholder:text-black"  />
                   <div className=" w-[20%]  text-white rounded-r-lg bg-cyan-500 h-8 flex items-center">
                   <FaSearch  className="h-5 w-5 ml-2 "/>
                   </div>

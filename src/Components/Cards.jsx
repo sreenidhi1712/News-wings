@@ -11,7 +11,7 @@ function Cards({title,Category,addbookmark,Bookmarked,viewindividual,navigate}) 
               {Category.map((items)=>(
                        <div key={items.title} className={  `h-60 w-[90%]  my-2 bg-slate-200  rounded-lg flex flex-col`} >
                                 <div className='h-[60%] w-[100%]  '>
-                                          <img src={items.urlToImage} className='h-full w-full object-cover '/>
+                                          <img src={items.image_url} className='h-full w-full object-cover '/>
                                 </div>
                                 <div className='h-[40%] w-[100%] flex flex-col justify-between'>
                                  <p className='text-sm'>{items.title}</p>
