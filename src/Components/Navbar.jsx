@@ -1,11 +1,12 @@
 import React, { useContext} from "react";
 import { CiMenuFries } from "react-icons/ci";
 import './Style.css';
+import { useNavigate } from "react-router-dom";
 
 
 const Navbar = () => {
 
-  
+  const navigate = useNavigate();
 
   return (
     <>
@@ -18,13 +19,13 @@ const Navbar = () => {
 
             <div className="h-[50%] mt-5 overflow-x-scroll hide-scrollbar mb-2"> {/* Component for  category options*/}
                 <ul className="flex justify-around gap-4 items-center text-white">
-                    <li className="font-bold text-sm ml-1">Latest</li>
-                    <li className="font-bold text-sm">Business</li>
-                    <li className="font-bold text-sm">Tech</li>
-                    <li className="font-bold text-sm">Entertainment</li>
-                    <li className="font-bold text-sm">Health</li>
-                    <li className="font-bold text-sm">Science</li>
-                    <li className="font-bold text-sm  mr-3">Sports</li>
+                    <li className="font-bold text-sm ml-1" onClick={()=>navigate('/category/Latest')}>Latest</li>
+                    <li className="font-bold text-sm" onClick={()=>navigate('/category/Business')}>Business</li>
+                    <li className="font-bold text-sm" onClick={()=>navigate('/category/Tech')}>Tech</li>
+                    <li className="font-bold text-sm" onClick={()=>navigate('/category/Entertainment')}>Entertainment</li>
+                    <li className="font-bold text-sm" onClick={()=>navigate('/category/Health')}>Health</li>
+                    <li className="font-bold text-sm" onClick={()=>navigate('/category/Science')}>Science</li>
+                    <li className="font-bold text-sm  mr-3" onClick={()=>navigate('/category/Sports')}>Sports</li>
                 </ul>
             </div>
             
