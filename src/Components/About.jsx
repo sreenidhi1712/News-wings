@@ -11,8 +11,8 @@ function About() {
                     <div className='h-[90%] w-[90%] rounded-lg  flex flex-col items-center justify-center '>
                              <p className='text-2xl text-black mx-2 w-[90%] text-center font-bold'>Get the Latest Notifications and Info from Us</p>
                                 <div className='flex flex-col items-center h-[60%] w-[90%] mt-14'>
-                             <input placeholder='Enter Your Email ' type='email' className='px-2 border-2 border-black  h-[20%] w-[100%] rounded-lg '/>
-                             <button className='h-[20%] w-[60%] bg-blue-700 rounded-2xl mt-6 text-white'>SUBSCRIBE</button>
+                             <input placeholder='Enter Your Email ' type='email' className='px-2 border-2 border-black  h-[20%] w-[100%] tab:w-[55%] lap:w-[40%] rounded-lg '/>
+                             <button className='h-[20%] w-[60%] bg-blue-700 rounded-2xl mt-6 text-white tab:w-[35%] lap:w-[20%]'>SUBSCRIBE</button>
                              </div>
                              
                     </div>
@@ -23,10 +23,10 @@ function About() {
                                 <p className='w-[95%] font-semibold mt-3 text-lg text-center'>We Bring News to you, You Bring Change in world</p>
                        </div>
                        <div className='h-[40%] w-[100%] flex items-center justify-evenly'>
-                                <FaFacebook/>
-                                <FaYoutube/>
-                                <FaInstagram/>
-                                <FaXTwitter/>
+                                <FaFacebook className='tab:h-8 tab:w-8'/>
+                                <FaYoutube className='tab:h-8 tab:w-8'/>
+                                <FaInstagram className='tab:h-8 tab:w-8'/>
+                                <FaXTwitter className='tab:h-8 tab:w-8'/>
                        </div>
            </div>
     </div>

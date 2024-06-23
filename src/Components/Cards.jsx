@@ -5,11 +5,11 @@ function Cards({title,Category,addbookmark,Bookmarked,viewindividual,navigate })
   return (
     <>
     {/* headlines */} 
-   <div className='flex flex-col w-full mt-5 items-center'>
+   <div className='flex flex-col w-full mt-5 items-center '>
               <p className='mx-3 font-bold text-2xl uppercase'>{title}</p>
-              <div className={`flex flex-col w-full items-center `} >
+              <div className={`flex flex-col w-full items-center mx-auto tab:flex-wrap tab:flex-row tab:justify-evenly`} >
               {Category.map((items)=>(
-                       <div key={items.title} className={  `h-60 w-[90%]  my-2 bg-slate-200  rounded-lg flex flex-col`} >
+                       <div key={items.title} className={  `h-60 w-[90%] tab:w-[45%] lap:h-80 lapl:w-[30%] my-2  bg-slate-200  rounded-lg flex flex-col`} >
                                 <div className='h-[60%] w-[100%]  '>
                                           <img src={items.image_url ?items.image_url:items.urlToImage} className='h-full w-full object-cover '/>
                                 </div>

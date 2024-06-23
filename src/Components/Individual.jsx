@@ -67,7 +67,7 @@ const viewindividual = (items)=>{
             <div className=' '>
                     <p className='font-bold mx-3'>{item.title}</p>
             </div>
-            <div className=' w-[90%] h-[20%] mt-3'>
+            <div className=' w-[90%] h-[20%] mt-3 tab:h-[40%] lap:w-[70%] lap:h-[45%] lapl:h-[65%] lapl:w-[45%]'  >
                 <img className='h-full w-full object-cover object-center' src={item.image_url?item.image_url:item.urlToImage}/>
 
             </div>

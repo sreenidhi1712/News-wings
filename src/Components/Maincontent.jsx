@@ -4,10 +4,10 @@ import Homepage from './Homepage'
 
 function Maincontent() {
   return (
-    <>
+    <div className='overflow-x-hidden'>
          <Navbar/>
          <Homepage/>
-    </>
+    </div>
   )
 }
 

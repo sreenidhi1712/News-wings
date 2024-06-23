@@ -72,9 +72,9 @@ const viewindividual = (items)=>{
   return (
     <div className='w-screen mb-10'>
 {/* news cards  https://newsapi.org/v2/top-headlines?country=us&apiKey=4c8372e1b7fa43c9a89c2a176b9461bb */}
-           <div className='flex overflow-x-scroll hide-scrollbar w-full  mt-28   '> 
+           <div className='flex overflow-x-scroll hide-scrollbar w-full  mt-28 lap:overflow-x-hidden lap:flex-wrap lap:justify-evenly  '> 
                {news.map((items)=>(
-                        <div key={items.title} className={`h-36 w-[85%] mx-3 flex flex-col justify-end flex-shrink-0 rounded-lg  bg-cover bg-center`} style={{ backgroundImage: `url(${items.image_url})` }}>
+                        <div key={items.title} className={`h-36 w-[85%] tab:w-[60%] lap:mt-5 lap:w-[40%] lap:h-60 lapl:w-[30%] tab:h-48 mx-3 flex flex-col justify-end flex-shrink-0 rounded-lg  bg-cover bg-center`} style={{ backgroundImage: `url(${items.image_url})` }}>
                                 <div className='mb-2'>
                                 <p className='font-bold text-sm text-white  ml-3'>{items.title}</p>
                                 </div>
@@ -95,9 +95,9 @@ const viewindividual = (items)=>{
 
            <div className='flex flex-col w-full mt-5'>
                <p className='mx-3 font-bold text-xl'>Trending Topic</p>
-               <div className={`flex overflow-x-scroll hide-scrollbar w-full `} >
+               <div className={`flex overflow-x-scroll hide-scrollbar w-full lap:overflow-hidden lap:flex-wrap lap:justify-evenly`} >
                {trending.map((items)=>(
-                        <div key={items.title} onClick={()=>navigate(`/category/${items.title}`)}  className={`h-32 w-[40%] mt-5 mx-3 flex-shrink-0  bg-slate-200  rounded-lg bg-cover bg-center`} style={{ backgroundImage: `url(${items.image})` }}>
+                        <div key={items.title} onClick={()=>navigate(`/category/${items.title}`)}  className={`h-32 w-[40%] lapl:w-[20%] tab:h-40 mt-5 mx-3 flex-shrink-0  bg-slate-200  rounded-lg bg-cover bg-center`} style={{ backgroundImage: `url(${items.image})` }}>
                                  <p className='text-white font-bold mt-3 ml-3'>{items.title}</p>
                                 
                         </div>
