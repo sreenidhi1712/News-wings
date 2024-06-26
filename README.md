@@ -17,7 +17,6 @@ Fast and Efficient: Utilizes React.js for efficient rendering and state manageme
 </br>
 
 <b>Usage</b>
-
 </br>
 <b>Installation:</b>
 </br>
@@ -28,8 +27,7 @@ npm install
 </br>
 npm start
 </br>
-
-
+</br>
 <b>Using News Wings:</b>
 </br>
 Access the application via the provided URL.
