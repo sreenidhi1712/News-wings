@@ -17,34 +17,25 @@ Fast and Efficient: Utilizes React.js for efficient rendering and state manageme
 </br>
 
 Usage
+</br>
 <b>Installation:</b>
-</br>
-
-bash
-</br>
-Copy code
 </br>
 npm install
 </br>
 
 <b>Run the Application:</b>
 </br>
-
-bash
-</br>
-Copy code
-</br>
 npm start
 </br>
+
+
 <b>Using News Wings:</b>
 </br>
-
 Access the application via the provided URL.
 </br>
 Browse through news articles categorized by topics or sources.
 </br>
-Use the search bar to find specific news articles based on keywords.
-</br>
+
 <b>Technologies Used</b>
 </br>
 React.js
