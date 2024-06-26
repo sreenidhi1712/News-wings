@@ -10,6 +10,7 @@ import Cards from './Cards';
 
 function Individual() {
 
+  const apiKeyIndividual = import.meta.env.VITE_API_KEY_INDIVIDUAL;
   const Bookmarked = useSelector(state=>state.Bookmark)
   
   const Dispatcher  = useDispatch();
@@ -31,7 +32,7 @@ const viewindividual = (items)=>{
       setRelated('top')
     }
      // const {ArticleId} = useParams();
-    const url = `https://newsdata.io/api/1/latest?apikey=pub_470053a94febd51cb9c0059d850ccd9e7a46d&category=top&image=1&size=3&q=india&language=en`;
+    const url = `https://newsdata.io/api/1/latest?apikey=${apiKeyIndividual}&category=top&image=1&size=3&q=india&language=en`;
 
     useEffect(()=>{
         const fetchrelatedNews = async () => {

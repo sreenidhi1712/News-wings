@@ -7,10 +7,11 @@ import axios from 'axios';
 import Cards from './Cards';
 
 function Category() {
+  const apiKeyCategory = import.meta.env.VITE_API_KEY_CATEGORY;
 
   const [page,setPage] = useState(0)
     const {categoryName} = useParams();
-    const url = `https://newsapi.org/v2/top-headlines?category=${categoryName}&apiKey=78874218049046c794b765da01425361&pageSize=5&language=en&page=${page}`
+    const url = `https://newsapi.org/v2/top-headlines?category=${categoryName}&apiKey=${apiKeyCategory}&pageSize=5&language=en&page=${page}`
     const [news,setNews] = useState([])
     const Bookmarked = useSelector(state=>state.Bookmark)
     const Dispatcher  = useDispatch();

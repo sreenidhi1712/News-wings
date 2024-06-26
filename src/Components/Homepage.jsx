@@ -10,6 +10,10 @@ import Cards from './Cards';
 
 
 function Homepage() {
+
+  const apiKeyURL = import.meta.env.VITE_API_KEY_URL;
+  const apiKeyLatest = import.meta.env.VITE_API_KEY_LATEST;
+  const apiKeyHeadlines = import.meta.env.VITE_API_KEY_HEADLINES;
      
   const Bookmarked = useSelector(state=>state.Bookmark)
   const Dispatcher  = useDispatch();
@@ -21,14 +25,10 @@ function Homepage() {
 const viewindividual = (items)=>{
   Dispatcher(viewarticle(items))
 }
-//newsapi.org
-  // const url = `https://newsapi.org/v2/everything?q=politics&apiKey=4c8372e1b7fa43c9a89c2a176b9461bb&pageSize=3&language=en&page=5`;
-  // const latesturl = `https://newsapi.org/v2/top-headlines?category=general&apiKey=4c8372e1b7fa43c9a89c2a176b9461bb&pageSize=3&language=en&page=2`;
-  // const headlineurl = `https://newsapi.org/v2/top-headlines?category=general&apiKey=4c8372e1b7fa43c9a89c2a176b9461bb&pageSize=3&language=en&page=3`;
-//newsorg.io
-  const url = `https://newsdata.io/api/1/latest?apikey=pub_46898b8ae28dc8cb31b1a1275d13b167dde4f&category=top&size=3&image=1&language=en`;
-  const latesturl = `https://newsdata.io/api/1/latest?apikey=pub_4678059751b9b341ae3efcfcb16d41ffe79ec&q=covid&size=3&country=in&image=1&language=en`;
-  const headlineurl = `https://newsdata.io/api/1/latest?apikey=pub_4700424948689e017859442de2ea3c50de67b&category=top&size=3&country=in&image=1&language=en`;
+
+  const url = `https://newsdata.io/api/1/latest?apikey=${apiKeyURL}&category=top&size=3&image=1&language=en`;
+  const latesturl = `https://newsdata.io/api/1/latest?apikey=${apiKeyLatest}&q=covid&size=3&country=in&image=1&language=en`;
+  const headlineurl = `https://newsdata.io/api/1/latest?apikey=${apiKeyHeadlines}&category=top&size=3&country=in&image=1&language=en`;
   const trending = [
         {image:"https://images.pexels.com/photos/209977/pexels-photo-209977.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
          title:"Sports"
@@ -71,7 +71,7 @@ const viewindividual = (items)=>{
    
   return (
     <div className='w-screen mb-10'>
-{/* news cards  https://newsapi.org/v2/top-headlines?country=us&apiKey=4c8372e1b7fa43c9a89c2a176b9461bb */}
+
            <div className='flex overflow-x-scroll hide-scrollbar w-full  mt-28 lap:overflow-x-hidden lap:flex-wrap lap:justify-evenly  '> 
                {news.map((items)=>(
                         <div key={items.title} className={`h-36 w-[85%] tab:w-[60%] lap:mt-5 lap:w-[40%] lap:h-60 lapl:w-[30%] tab:h-48 mx-3 flex flex-col justify-end flex-shrink-0 rounded-lg  bg-cover bg-center`} style={{ backgroundImage: `url(${items.image_url})` }}>
