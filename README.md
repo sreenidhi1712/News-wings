@@ -41,4 +41,4 @@ React.js
 </br>
 Tailwind CSS
 </br>
-News API (or any specific news API used)
+News API (or any news API )
