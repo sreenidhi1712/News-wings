@@ -17,6 +17,7 @@ Fast and Efficient: Utilizes React.js for efficient rendering and state manageme
 </br>
 
 Usage
+
 </br>
 <b>Installation:</b>
 </br>
