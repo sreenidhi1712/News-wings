@@ -1,31 +1,54 @@
 <b>News Wings</b>
-
+</br>
 News Wings is a modern news aggregation web application developed with React.js and styled using Tailwind CSS. Stay updated with the latest news from around the world, powered by intuitive design and seamless user experience.
+</br>
 
-Features
+<b>Features</b>
+</br>
 News Aggregation: Fetches and displays news articles from various sources.
+</br>
 Search Functionality: Search for specific news topics or keywords.
+</br>
 Responsive Design: Built with Tailwind CSS for a mobile-first, responsive layout.
+</br>
 User-Friendly Interface: Intuitive and easy-to-navigate UI for enhanced user experience.
+</br>
 Fast and Efficient: Utilizes React.js for efficient rendering and state management.
+</br>
+
 Usage
-Installation:
+<b>Installation:</b>
+</br>
 
 bash
+</br>
 Copy code
+</br>
 npm install
-Run the Application:
+</br>
+
+<b>Run the Application:</b>
+</br>
 
 bash
+</br>
 Copy code
+</br>
 npm start
-Using News Wings:
+</br>
+<b>Using News Wings:</b>
+</br>
 
 Access the application via the provided URL.
+</br>
 Browse through news articles categorized by topics or sources.
+</br>
 Use the search bar to find specific news articles based on keywords.
-Technologies Used
+</br>
+<b>Technologies Used</b>
+</br>
 React.js
+</br>
 Tailwind CSS
-Node.js (for backend integration, if applicable)
+</br>
 News API (or any specific news API used)
