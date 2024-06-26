@@ -20,7 +20,7 @@ Fast and Efficient: Utilizes React.js for efficient rendering and state manageme
 </br>
 <b>Installation:</b>
 </br>
-npm install 
+npm create vite@latest
 </br>
 </br>
 <b>Run the Application:</b>
