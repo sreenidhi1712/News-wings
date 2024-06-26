@@ -16,14 +16,14 @@ User-Friendly Interface: Intuitive and easy-to-navigate UI for enhanced user exp
 Fast and Efficient: Utilizes React.js for efficient rendering and state management.
 </br>
 
-Usage
+<b>Usage</b>
 
 </br>
 <b>Installation:</b>
 </br>
 npm install
 </br>
-
+</br>
 <b>Run the Application:</b>
 </br>
 npm start
