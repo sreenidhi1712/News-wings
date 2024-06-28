@@ -79,7 +79,7 @@ const viewindividual = (items)=>{
 
            <div className='flex overflow-x-scroll hide-scrollbar w-full  mt-28 lap:overflow-x-hidden lap:flex-wrap lap:justify-evenly  '> 
                {news.map((items)=>(
-                        <div key={items.title} className={`h-36 w-[85%] tab:w-[60%] lap:mt-5 lap:w-[40%] lap:h-60 lapl:w-[30%] tab:h-48 mx-3 flex flex-col justify-end flex-shrink-0 rounded-lg  bg-cover bg-center`} style={{ backgroundImage: `url(${items.image_url})` }}>
+                        <div key={items.article_id} className={`h-36 w-[85%] tab:w-[60%] lap:mt-5 lap:w-[40%] lap:h-60 lapl:w-[30%] tab:h-48 mx-3 flex flex-col justify-end flex-shrink-0 rounded-lg  bg-cover bg-center`} style={{ backgroundImage: `url(${items.image_url})` }}>
                                 <div className='mb-2'>
                                 <p className='font-bold text-sm text-white  ml-3'>{items.title}</p>
                                 </div>
