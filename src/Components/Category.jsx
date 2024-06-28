@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { addtobookmark } from '../Store-for-redux/Addtobookmark';
-import { useDispatch ,useSelector} from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { viewarticle } from '../Store-for-redux/IndividualArticle';
 import axios from 'axios';
@@ -8,69 +8,82 @@ import Cards from './Cards';
 
 function Category() {
   const apiKeyCategory = import.meta.env.VITE_API_KEY_CATEGORY;
+  const { categoryName } = useParams();
+  const [news, setNews] = useState([]);
+  const Bookmarked = useSelector(state => state.Bookmark);
+  const Dispatcher = useDispatch();
+  const navigate = useNavigate();
+  const [totalPages, setTotalPages] = useState(0);
+  const [currentPageId, setCurrentPageId] = useState(null); // Current page ID
+  const [nextPageId, setNextPageId] = useState(null); // Next page ID
+  const [historyStack, setHistoryStack] = useState([]); // Stack for previous page IDs
 
-  const [page,setPage] = useState(0)
-    const {categoryName} = useParams();
-    const url = `https://newsapi.org/v2/top-headlines?category=${categoryName}&apiKey=${apiKeyCategory}&pageSize=5&language=en&page=${page}`
-    const [news,setNews] = useState([])
-    const Bookmarked = useSelector(state=>state.Bookmark)
-    const Dispatcher  = useDispatch();
-    const navigate = useNavigate();
-    const addbookmark = (items)=>{
-      // sessionStorage.setItem('bookmarkedData', JSON.stringify(items));
-        Dispatcher(addtobookmark(items))
+  const addbookmark = (items) => {
+    Dispatcher(addtobookmark(items));
+  };
+
+  const viewindividual = (items) => {
+    Dispatcher(viewarticle(items));
+  };
+
+  const handlenext = () => {
+    if (nextPageId) {
+      setHistoryStack([...historyStack, currentPageId]);
+      setCurrentPageId(nextPageId);
+    }
+  };
+
+  const handleprev = () => {
+    if (historyStack.length > 0) {
+      const prevPageId = historyStack.pop();
+      setHistoryStack(historyStack);
+      setCurrentPageId(prevPageId);
+    }
+  };
+
+  useEffect(() => {
+    const fetchCategory = async () => {
+      try {
+        const url = `https://newsdata.io/api/1/latest?apikey=${apiKeyCategory}&category=${categoryName}&image=1&size=9&q=india&language=en${currentPageId ? `&page=${currentPageId}` : ''}`;
+        const response = await axios.get(url);
+        setNews(response.data.results);
+        setTotalPages(Math.ceil((response.data.totalResults) / 9));
+        setNextPageId(response.data.nextPage); // Assuming the API returns this
+      } catch (error) {
+        console.log('Error fetching latest news:', error);
       }
-    const viewindividual = (items)=>{
-      Dispatcher(viewarticle(items))
-    }
+    };
+    fetchCategory();
+  }, [currentPageId]);
 
-  
-    const [totalpages,setTotalpages] = useState(0) 
-  
-    
-    const handlenext = ()=>{
-      
-      if(page +1 < totalpages){
-       
-        setPage(page+1);
-      }
-    }
-  
-
-    const handleprev = ()=>{
-      if(page -1 <= 1){
-        setPage(1)
-      }else{
-       
-        setPage(page - 1 )
-      } 
-      
-    }
- 
-    useEffect(()=>{
-        const fetchcategory = async () => {
-            try {
-              const response = await axios.get(url);
-               setTotalpages(Math.ceil((response.data.totalResults)/5));
-              console.log(totalpages)
-              setNews(response.data.articles);
-            } catch (error) {
-              console.log('Error fetching latest news:', error);
-            }
-          };
-          fetchcategory();
-    },[page])
   return (
-    <div className='mb-10'>
-         <Cards title={categoryName} Category={news} addbookmark={addbookmark} Bookmarked={Bookmarked} viewindividual={viewindividual} navigate={navigate} />
-         <div className='flex mb-12 w-full justify-between'>
-         <button className={`h-6 w-[30%]  rounded-md ml-2 bg-green-400 disabled:bg-lime-700`} disabled={page  <= 1} onClick={handleprev}>Prev Page</button>
-          <button className={`h-6 w-[30%]  rounded-md mr-2 bg-green-400 disabled:bg-lime-700`}  disabled={page > totalpages} onClick={handlenext}>Next Page</button>
-         </div>
+    <div className='mb-10 flex flex-col items-center'>
+      <Cards
+        title={categoryName}
+        Category={news}
+        addbookmark={addbookmark}
+        Bookmarked={Bookmarked}
+        viewindividual={viewindividual}
+        navigate={navigate}
+      />
+      <div className='flex mb-12 w-[90%] justify-between'>
+        <button
+          className={`h-6 w-[30%] rounded-md ml-2 bg-green-400 disabled:bg-lime-700 lap:h-8 lap:w-[10%]`}
+          disabled={historyStack.length === 0}
+          onClick={handleprev}
+        >
+          Prev Page
+        </button>
+        <button
+          className={`h-6 w-[30%] rounded-md mr-2 bg-green-400 disabled:bg-lime-700 lap:h-8 lap:w-[10%]`}
+          disabled={!nextPageId}
+          onClick={handlenext}
+        >
+          Next Page
+        </button>
+      </div>
     </div>
-  )
+  );
 }
 
-export default Category
-
-
+export default Category;

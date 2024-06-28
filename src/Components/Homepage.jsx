@@ -7,6 +7,7 @@ import { useDispatch ,useSelector} from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { viewarticle } from '../Store-for-redux/IndividualArticle';
 import Cards from './Cards';
+import Category from './Category';
 
 
 function Homepage() {
@@ -31,19 +32,24 @@ const viewindividual = (items)=>{
   const headlineurl = `https://newsdata.io/api/1/latest?apikey=${apiKeyHeadlines}&category=top&size=3&country=in&image=1&language=en`;
   const trending = [
         {image:"https://images.pexels.com/photos/209977/pexels-photo-209977.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-         title:"Sports"
+         title:"Sports",
+         Category:"sports"
         },
         { image:"https://images.pexels.com/photos/346885/pexels-photo-346885.jpeg?auto=compress&cs=tinysrgb&w=600",
-             title:"politics"
+             title:"politics",
+              Category:"politics"
         },
         { image:"https://images.pexels.com/photos/1034940/pexels-photo-1034940.jpeg?auto=compress&cs=tinysrgb&w=600",
-             title:"general"
+             title:"General",
+              Category:"top"
         },
         { image:"https://images.pexels.com/photos/1957478/pexels-photo-1957478.jpeg?auto=compress&cs=tinysrgb&w=600",
-             title:"Business"
+             title:"Business",
+              Category:"business"
         },
         {image:"https://images.pexels.com/photos/274937/pexels-photo-274937.jpeg?auto=compress&cs=tinysrgb&w=600",
-             title:"Entertainment"
+             title:"Entertainment",
+              Category:"entertainment"
         }
 ]
 
@@ -97,7 +103,7 @@ const viewindividual = (items)=>{
                <p className='mx-3 font-bold text-xl'>Trending Topic</p>
                <div className={`flex overflow-x-scroll hide-scrollbar w-full lap:overflow-hidden lap:flex-wrap lap:justify-evenly`} >
                {trending.map((items)=>(
-                        <div key={items.title} onClick={()=>navigate(`/category/${items.title}`)}  className={`h-32 w-[40%] lapl:w-[20%] tab:h-40 mt-5 mx-3 flex-shrink-0  bg-slate-200  rounded-lg bg-cover bg-center`} style={{ backgroundImage: `url(${items.image})` }}>
+                        <div key={items.title} onClick={()=>navigate(`/category/${items.Category}`)}  className={`h-32 w-[40%] lapl:w-[20%] tab:h-40 mt-5 mx-3 flex-shrink-0  bg-slate-200  rounded-lg bg-cover bg-center`} style={{ backgroundImage: `url(${items.image})` }}>
                                  <p className='text-white font-bold mt-3 ml-3'>{items.title}</p>
                                 
                         </div>
