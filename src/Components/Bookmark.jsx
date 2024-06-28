@@ -32,8 +32,8 @@ function Bookmark() {
     <div className='h-full w-screen'>
       {bookmarkState.length === 0 ? (
         <div className='h-screen w-full flex flex-col justify-center items-center'>
-        <CiBookmark className='h-32 w-32' />
-        <p className='text-gray-600 text-6xl mt-2'>No bookmarks saved yet.</p>
+        <CiBookmark className=' h-32 w-32' />
+        <p className='text-gray-600 text-center text-xl mm:text-2xl ml:text-3xl tab:text-4xl lap:text-6xl mt-2'>No bookmarks saved yet.</p>
         </div>
       ) : (
         <Cards
