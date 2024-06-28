@@ -7,7 +7,6 @@ import { useDispatch ,useSelector} from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { viewarticle } from '../Store-for-redux/IndividualArticle';
 import Cards from './Cards';
-import Category from './Category';
 
 
 function Homepage() {
