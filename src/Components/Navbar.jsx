@@ -19,13 +19,13 @@ const Navbar = () => {
 
             <div className="h-[50%] mt-5 overflow-x-scroll hide-scrollbar mb-2"> {/* Component for  category options*/}
                 <ul className="flex justify-around gap-4 items-center text-white">
-                    <li className="font-bold text-sm ml-1 tab:text-base lap:text-lg" onClick={()=>navigate('/category/general')}>Latest</li>
-                    <li className="font-bold text-sm tab:text-base lap:text-lg" onClick={()=>navigate('/category/Business')}>Business</li>
-                    <li className="font-bold text-sm tab:text-base lap:text-lg" onClick={()=>navigate('/category/Tech')}>Tech</li>
-                    <li className="font-bold text-sm tab:text-base lap:text-lg" onClick={()=>navigate('/category/Entertainment')}>Entertainment</li>
-                    <li className="font-bold text-sm tab:text-base lap:text-lg" onClick={()=>navigate('/category/Health')}>Health</li>
-                    <li className="font-bold text-sm tab:text-base lap:text-lg" onClick={()=>navigate('/category/Science')}>Science</li>
-                    <li className="font-bold text-sm  mr-3 tab:text-base lap:text-lg" onClick={()=>navigate('/category/Sports')}>Sports</li>
+                    <li className="font-bold text-sm ml-1 tab:text-base lap:text-lg cursor-pointer" onClick={()=>navigate('/category/top')}>Top News</li>
+                    <li className="font-bold text-sm tab:text-base lap:text-lg cursor-pointer" onClick={()=>navigate('/category/Business')}>Business</li>
+                    <li className="font-bold text-sm tab:text-base lap:text-lg cursor-pointer" onClick={()=>navigate('/category/technology')}>Tech</li>
+                    <li className="font-bold text-sm tab:text-base lap:text-lg cursor-pointer" onClick={()=>navigate('/category/Entertainment')}>Entertainment</li>
+                    <li className="font-bold text-sm tab:text-base lap:text-lg cursor-pointer" onClick={()=>navigate('/category/Health')}>Health</li>
+                    <li className="font-bold text-sm tab:text-base lap:text-lg cursor-pointer" onClick={()=>navigate('/category/Science')}>Science</li>
+                    <li className="font-bold text-sm  mr-3 tab:text-base lap:text-lg cursor-pointer" onClick={()=>navigate('/category/Sports')}>Sports</li>
                 </ul>
             </div>
             

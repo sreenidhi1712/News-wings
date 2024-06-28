@@ -113,7 +113,7 @@ const viewindividual = (items)=>{
                <p className='mx-3 font-bold text-xl'>Trending Topic</p>
                <div className={`flex overflow-x-scroll hide-scrollbar w-full lap:overflow-hidden lap:flex-wrap lap:justify-evenly`} >
                {trending.map((items)=>(
-                        <div key={items.title} onClick={()=>navigate(`/category/${items.Category}`)}  className={`h-32 w-[40%] lapl:w-[20%] tab:h-40 mt-5 mx-3 flex-shrink-0  bg-slate-200  rounded-lg bg-cover bg-center`} style={{ backgroundImage: `url(${items.image})` }}>
+                        <div key={items.title} onClick={()=>navigate(`/category/${items.Category}`)}  className={`h-32 w-[40%] lapl:w-[20%] tab:h-40 mt-5 mx-3 flex-shrink-0  bg-slate-200  rounded-lg bg-cover bg-center cursor-pointer`} style={{ backgroundImage: `url(${items.image})` }}>
                                  <p className='text-white font-bold mt-3 ml-3'>{items.title}</p>
                                 
                         </div>

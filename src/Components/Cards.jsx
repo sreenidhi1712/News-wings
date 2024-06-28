@@ -21,7 +21,7 @@ function Cards({title,Category,addbookmark,Bookmarked,viewindividual,navigate })
                                      viewindividual(items);
                                      navigate(`/individual/${items.title}`)
                                      }} className='h-[80%] w-[30%] rounded-md text-amber-50 ml-3 bg-green-500' >View More</button>
-                                <FaBookmark className={`${Bookmarked.some((bookmarkedItem) => bookmarkedItem.title === items.title)?`text-red-600`:`text-gray-500`} mr-2 mt-1 h-5 w-5`} onClick={()=>addbookmark(items)} />
+                                <FaBookmark className={`${Bookmarked.some((bookmarkedItem) => bookmarkedItem.title === items.title)?`text-red-600`:`text-gray-500`} mr-2 mt-1 h-5 w-5 cursor-pointer`} onClick={()=>addbookmark(items)} />
                                  </div>
                                 </div>
                        </div>

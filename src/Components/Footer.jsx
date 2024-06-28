@@ -11,9 +11,9 @@ function Footer() {
 
   return (
     <div className='bottom-0 left-0 fixed w-screen h-10 bg-green-500 flex items-center justify-evenly'>
-        <IoMdHome className='h-7 w-7 text-white' onClick={()=>navigate('/')}/>
-        <FaBookmark  className='h-6 w-6 text-white 'onClick={()=>navigate('/bookmark')}/>
-        <FcAbout className='h-7 w-7 text-white ' onClick={()=>navigate('/aboutus')}/>
+        <IoMdHome className='h-7 w-7 text-white cursor-pointer' onClick={()=>navigate('/')}/>
+        <FaBookmark  className='h-6 w-6 text-white cursor-pointer'onClick={()=>navigate('/bookmark')}/>
+        <FcAbout className='h-7 w-7 text-white cursor-pointer' onClick={()=>navigate('/aboutus')}/>
     </div>
   )
 }

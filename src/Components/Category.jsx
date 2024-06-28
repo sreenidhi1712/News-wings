@@ -73,7 +73,7 @@ function Category() {
       />
       <div className='flex mb-12 w-[90%] justify-between'>
         <button
-          className={`h-6 w-[30%] rounded-md ml-2 bg-green-400 disabled:bg-lime-700 lap:h-8 lap:w-[10%]`}
+          className={`h-6 w-[30%] rounded-md ml-2 bg-green-400 disabled:bg-lime-700 disabled:cursor-not-allowed lap:h-8 lap:w-[10%]`}
           disabled={historyStack.length === 0}
           onClick={handleprev}
         >
