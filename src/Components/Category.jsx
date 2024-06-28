@@ -5,6 +5,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { viewarticle } from '../Store-for-redux/IndividualArticle';
 import axios from 'axios';
 import Cards from './Cards';
+import Loader from './Loader';
 
 function Category() {
   const apiKeyCategory = import.meta.env.VITE_API_KEY_CATEGORY;
@@ -17,6 +18,7 @@ function Category() {
   const [currentPageId, setCurrentPageId] = useState(null); // Current page ID
   const [nextPageId, setNextPageId] = useState(null); // Next page ID
   const [historyStack, setHistoryStack] = useState([]); // Stack for previous page IDs
+  const [loading, setLoading] = useState(true);
 
   const addbookmark = (items) => {
     Dispatcher(addtobookmark(items));
@@ -44,11 +46,13 @@ function Category() {
   useEffect(() => {
     const fetchCategory = async () => {
       try {
+        setLoading(true);
         const url = `https://newsdata.io/api/1/latest?apikey=${apiKeyCategory}&category=${categoryName}&image=1&size=9&q=india&language=en${currentPageId ? `&page=${currentPageId}` : ''}`;
         const response = await axios.get(url);
         setNews(response.data.results);
         setTotalPages(Math.ceil((response.data.totalResults) / 9));
         setNextPageId(response.data.nextPage); // Assuming the API returns this
+        setLoading(false);
       } catch (error) {
         console.log('Error fetching latest news:', error);
       }
@@ -57,7 +61,8 @@ function Category() {
   }, [currentPageId]);
 
   return (
-    <div className='mb-10 flex flex-col items-center'>
+    <>
+    {loading ? <Loader/> :<div className='mb-10 flex flex-col items-center'>
       <Cards
         title={categoryName}
         Category={news}
@@ -83,6 +88,8 @@ function Category() {
         </button>
       </div>
     </div>
+}
+    </>
   );
 }
 

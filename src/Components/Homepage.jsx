@@ -7,6 +7,8 @@ import { useDispatch ,useSelector} from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { viewarticle } from '../Store-for-redux/IndividualArticle';
 import Cards from './Cards';
+import Loader from './Loader';
+
 
 
 function Homepage() {
@@ -14,7 +16,7 @@ function Homepage() {
   const apiKeyURL = import.meta.env.VITE_API_KEY_URL;
   const apiKeyLatest = import.meta.env.VITE_API_KEY_LATEST;
   const apiKeyHeadlines = import.meta.env.VITE_API_KEY_HEADLINES;
-     
+  const [loading, setLoading] = useState(true);
   const Bookmarked = useSelector(state=>state.Bookmark)
   const Dispatcher  = useDispatch();
   const navigate = useNavigate();
@@ -67,14 +69,23 @@ const viewindividual = (items)=>{
 
   useEffect(() => {
 
-    fetchdata(latesturl,setLatestNews);
-    fetchdata(headlineurl,setHeadlines);
-    fetchdata(url,setNews)
+    const fetchAllData = async () => {
+      setLoading(true); // Start loading
+      await fetchdata(latesturl, setLatestNews);
+      await fetchdata(headlineurl, setHeadlines);
+      await fetchdata(url, setNews);
+      setLoading(false); // End loading
+    };
+
+    fetchAllData();
    
   }, []);
 
    
   return (
+    <>
+    {loading ? <Loader/> :
+   
     <div className='w-screen mb-10'>
 
            <div className='flex overflow-x-scroll hide-scrollbar w-full  mt-28 lap:overflow-x-hidden lap:flex-wrap lap:justify-evenly  '> 
@@ -118,6 +129,8 @@ const viewindividual = (items)=>{
 
 
     </div>
+    }
+    </>
   )
 }
 
