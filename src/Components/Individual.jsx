@@ -60,7 +60,7 @@ const viewindividual = (items)=>{
     <div className='mb-10'>
    
     {Indiviarticle.map((item)=>(
-<div className='h-screen w-screen flex flex-col items-center overflow-x-hidden mb-14' key={item.title}>
+<div className='h-screen w-screen flex flex-col items-center overflow-x-hidden mb-14' key={item.article_id}>
     <div className='h-14 w-full flex items-center  justify-center bg-slate-400'>
      
         <p className='py-5 font-bold text-white '>News Details</p>
